@@ -110,7 +110,7 @@ export const OverrideEditor: Component<OverrideEditorProps> = (props) => {
                   <td class="p-1 text-right">
                     <input
                       type="number"
-                      class="border rounded px-1 py-0.5 w-16 text-right tabular-nums"
+                      class="gat-input w-16 text-right tabular-nums"
                       value={overrideVal()}
                       min={0}
                       onInput={(e) => setSeat(value, Number(e.currentTarget.value))}
@@ -158,12 +158,12 @@ export const OverrideEditor: Component<OverrideEditorProps> = (props) => {
       </div>
 
       <div class="space-y-1">
-        <label class="text-sm font-medium" for={`rationale-${props.axis}`}>
+        <label class="gat-field__label" for={`rationale-${props.axis}`}>
           Begründung (Pflicht, mindestens {RATIONALE_MIN} Zeichen)
         </label>
         <textarea
           id={`rationale-${props.axis}`}
-          class="w-full border rounded px-2 py-1 text-sm h-24"
+          class="gat-textarea h-24"
           value={rationale()}
           onInput={(e) => setRationale(e.currentTarget.value)}
           placeholder="Warum wird vom proportionalen Vorschlag abgewichen?"

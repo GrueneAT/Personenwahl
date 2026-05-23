@@ -608,17 +608,17 @@ export const Stage1Panel: Component = () => {
             <h2 class="card-title">4. Stichprobengröße und Seed</h2>
           </div>
           {/* Inputs grid: 2 columns on ≥sm, stacked on mobile. Both inputs
-              share the .input-base style so they render at identical height. */}
+              share the DS `.gat-input` style so they render at identical height. */}
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="input-label" for="stage1-target-n">
+              <label class="gat-field__label" for="stage1-target-n">
                 Stichprobengröße N
               </label>
               <input
                 id="stage1-target-n"
                 type="number"
                 min="1"
-                class="input-base tabular-nums"
+                class="gat-input tabular-nums"
                 data-testid="stage1-target-n"
                 value={targetN() ?? ''}
                 onInput={(e) => handleTargetNInput(e.currentTarget.value)}
@@ -626,13 +626,13 @@ export const Stage1Panel: Component = () => {
               />
             </div>
             <div>
-              <label class="input-label" for="stage1-seed">
+              <label class="gat-field__label" for="stage1-seed">
                 Seed (deterministisch)
               </label>
               <input
                 id="stage1-seed"
                 type="number"
-                class="input-base tabular-nums"
+                class="gat-input tabular-nums"
                 data-testid="stage1-seed"
                 value={seed()}
                 onInput={(e) => changeSeed(Number(e.currentTarget.value))}

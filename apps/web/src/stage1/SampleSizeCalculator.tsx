@@ -95,14 +95,14 @@ export const SampleSizeCalculator: Component<SampleSizeCalculatorProps> = (props
 
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label class="input-label" for="stage1-panel-size">
+          <label class="gat-field__label" for="stage1-panel-size">
             Ziel-Panelgröße
           </label>
           <input
             id="stage1-panel-size"
             type="number"
             min="1"
-            class="input-base tabular-nums"
+            class="gat-input tabular-nums"
             data-testid="stage1-panel-size"
             value={panelSize()}
             onInput={(e) => {
@@ -117,7 +117,7 @@ export const SampleSizeCalculator: Component<SampleSizeCalculatorProps> = (props
         </div>
 
         <div>
-          <span class="input-label">Outreach-Methode</span>
+          <span class="gat-field__label">Outreach-Methode</span>
           <fieldset
             class="space-y-1 mt-1"
             data-testid="stage1-outreach-mode"
@@ -182,7 +182,7 @@ export const SampleSizeCalculator: Component<SampleSizeCalculatorProps> = (props
       <Show when={outreach() === 'custom'}>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 border-l-4 border-slate-300 pl-3">
           <div>
-            <label class="input-label" for="stage1-custom-rate-min">
+            <label class="gat-field__label" for="stage1-custom-rate-min">
               Rücklauf min (%)
             </label>
             <input
@@ -191,14 +191,14 @@ export const SampleSizeCalculator: Component<SampleSizeCalculatorProps> = (props
               min="0.1"
               max="100"
               step="0.1"
-              class="input-base tabular-nums"
+              class="gat-input tabular-nums"
               data-testid="stage1-custom-rate-min"
               value={customMinPct()}
               onInput={(e) => setCustomMinPct(e.currentTarget.value)}
             />
           </div>
           <div>
-            <label class="input-label" for="stage1-custom-rate-max">
+            <label class="gat-field__label" for="stage1-custom-rate-max">
               Rücklauf max (%)
             </label>
             <input
@@ -207,7 +207,7 @@ export const SampleSizeCalculator: Component<SampleSizeCalculatorProps> = (props
               min="0.1"
               max="100"
               step="0.1"
-              class="input-base tabular-nums"
+              class="gat-input tabular-nums"
               data-testid="stage1-custom-rate-max"
               value={customMaxPct()}
               onInput={(e) => setCustomMaxPct(e.currentTarget.value)}
