@@ -201,11 +201,7 @@ export const App: Component = () => {
         Zum Hauptinhalt springen
       </a>
       <Sidebar mode={mode} />
-      <main
-        id="main"
-        tabindex="-1"
-        class="mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-10 space-y-8"
-      >
+      <main id="main" tabindex="-1" class="mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-10 space-y-8">
         {/* Top navigation: pill-button tab bar. Visible at <md only — at md+
             the sidebar is the primary navigation. The pill-bar remains in
             the DOM at all breakpoints (display:none above md) because the
