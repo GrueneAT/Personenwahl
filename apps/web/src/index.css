@@ -247,9 +247,24 @@
   /* ---- Form Inputs ---- *
    * Form primitives come from the DS v2.1 (`.gat-input` / `.gat-select`
    * / `.gat-textarea` / `.gat-field__label`). The local `.input-base` /
-   * `.input-label` / `.field` / `.field-label` rules are gone. The
-   * Tailwind `min-h-row-h` utility (44px) is used at the call site
-   * where a strict touch-target floor is required. */
+   * `.input-label` / `.field` / `.field-label` rules are gone.
+   *
+   * The DS sizes inputs by font-line + padding, which on mobile drops
+   * below the app's 44 px touch-target floor (mobile-touch-targets.spec.ts
+   * asserts width ≥ 44 AND height ≥ 44 on Stage 1 N / Seed inputs and the
+   * OverrideEditor cells). We bump min-height to --row-h on every DS
+   * input variant the app uses so the contract holds across all call
+   * sites without per-input min-h utilities. */
+  .gat-input,
+  .gat-select,
+  .gat-textarea {
+    min-height: var(--row-h);
+  }
+  .gat-textarea {
+    /* Textareas are vertically expandable; the floor still applies for
+       the collapsed state. Use it as min-height, not as enforced height. */
+    min-height: max(var(--row-h), 4rem);
+  }
 
   /* ---- Drop-Zone (CSV upload visual style) ---- */
   .dropzone {
