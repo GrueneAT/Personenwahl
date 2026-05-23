@@ -879,10 +879,10 @@ export const Stage1Panel: Component = () => {
                 <div class="k">
                   Unterbesetzt{' '}
                   <Show when={(coverage()?.underfilledStrata ?? 0) > 0}>
-                    <span class="status-pill status-pill-warn ml-1">Hinweis</span>
+                    <span class="gat-tag gat-tag--warn ml-1">Hinweis</span>
                   </Show>
                   <Show when={(coverage()?.underfilledStrata ?? 0) === 0}>
-                    <span class="status-pill status-pill-ok ml-1">OK</span>
+                    <span class="gat-tag gat-tag--ok ml-1">OK</span>
                   </Show>
                 </div>
                 <div class="v">{coverage()?.underfilledStrata ?? 0}</div>
@@ -1048,7 +1048,7 @@ export const Stage1Panel: Component = () => {
                           <td class="text-right tnum">{s.n_h_actual}</td>
                           <td class="text-center">
                             <span
-                              class={`status-pill ${s.underfilled ? 'status-pill-warn' : 'status-pill-ok'}`}
+                              class={`gat-tag ${s.underfilled ? 'gat-tag--warn' : 'gat-tag--ok'}`}
                             >
                               {s.underfilled ? 'unterbesetzt' : 'ok'}
                             </span>

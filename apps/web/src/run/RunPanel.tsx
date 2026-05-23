@@ -259,7 +259,7 @@ export const RunPanel: Component<RunPanelProps> = (props) => {
               <Show when={props.override}>
                 <div class="flex flex-col gap-2">
                   <span
-                    class="status-pill status-pill-warn self-start"
+                    class="gat-tag gat-tag--warn self-start"
                     data-testid="seat-allocation-active-badge"
                   >
                     Manuelle Sitz-Allokation aktiv — siehe Audit-Export

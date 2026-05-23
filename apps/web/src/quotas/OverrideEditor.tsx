@@ -191,10 +191,10 @@ export const OverrideEditor: Component<OverrideEditorProps> = (props) => {
           Zurück zur statistischen Baseline
         </button>
         <span
-          class="status-pill"
+          class="gat-tag"
           classList={{
-            'status-pill-ok': commitOk(),
-            'status-pill-warn': !commitOk(),
+            'gat-tag--ok': commitOk(),
+            'gat-tag--warn': !commitOk(),
           }}
           data-testid="seat-allocation-commit-status"
         >

@@ -236,22 +236,7 @@
     color: var(--ink);
   }
 
-  /* ---- Status Pills (in tables / inline) ---- */
-  .status-pill {
-    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium;
-  }
-  .status-pill-ok {
-    background: var(--ok-soft);
-    color: var(--ok);
-  }
-  .status-pill-warn {
-    background: var(--warn-soft);
-    color: var(--warn);
-  }
-  .status-pill-err {
-    background: var(--err-soft);
-    color: var(--err);
-  }
+  /* Status pills migrated to DS v2.1 `.gat-tag` + `--ok/--warn/--error` modifiers. */
 
   /* ---- Form Inputs ---- *
    * Form primitives come from the DS v2.1 (`.gat-input` / `.gat-select`
@@ -436,36 +421,7 @@
     margin: 0;
   }
 
-  .sig-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--gap-2);
-    padding: var(--gap-1) var(--gap-3);
-    background: var(--ok-soft);
-    color: var(--ok);
-    border: 1px solid oklch(80% 0.08 145);
-    border-radius: 9999px;
-    font-family: var(--mono);
-    font-size: 12px;
-    font-feature-settings:
-      'tnum' 1,
-      'calt' 0;
-  }
-  .sig-pill::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--ok);
-  }
-  .sig-pill.is-unsigned {
-    background: var(--warn-soft);
-    color: var(--warn);
-    border-color: oklch(80% 0.1 60);
-  }
-  .sig-pill.is-unsigned::before {
-    background: var(--warn);
-  }
+  /* Signature lozenge migrated to DS v2.1 `.gat-tag --ok / --warn`. */
 
   /* ---- Stats grid: 4 cols ≥lg, 2 md→lg, 1 <md ---- */
   .stats-grid {

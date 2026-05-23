@@ -37,7 +37,7 @@ const Overview: Component = () => {
           >
             <div class="flex items-center justify-between gap-2">
               <span class="text-xs font-semibold uppercase tracking-wide text-ink-3">Stage 1</span>
-              <span class="status-pill status-pill-ok">verfügbar</span>
+              <span class="gat-tag gat-tag--ok">verfügbar</span>
             </div>
             <h3 class="text-lg font-serif font-semibold text-ink">Versand-Liste ziehen</h3>
             <p class="text-sm text-ink-2">
@@ -52,7 +52,7 @@ const Overview: Component = () => {
           >
             <div class="flex items-center justify-between gap-2">
               <span class="text-xs font-semibold uppercase tracking-wide text-ink-3">Stage 3</span>
-              <span class="status-pill status-pill-ok">verfügbar</span>
+              <span class="gat-tag gat-tag--ok">verfügbar</span>
             </div>
             <h3 class="text-lg font-serif font-semibold text-ink">Panel-Auswahl</h3>
             <p class="text-sm text-ink-2">

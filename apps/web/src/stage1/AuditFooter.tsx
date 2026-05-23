@@ -201,12 +201,12 @@ export const AuditFooter: Component<Props> = (props) => {
         <Show
           when={props.doc.signature_algo}
           fallback={
-            <span class="sig-pill is-unsigned" data-testid="audit-footer-sig-algo">
+            <span class="gat-tag gat-tag--warn" data-testid="audit-footer-sig-algo">
               noch nicht signiert
             </span>
           }
         >
-          <span class="sig-pill" data-testid="audit-footer-sig-algo">
+          <span class="gat-tag gat-tag--ok" data-testid="audit-footer-sig-algo">
             {props.doc.signature_algo}
           </span>
         </Show>
