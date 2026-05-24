@@ -440,26 +440,26 @@ export const Stage1Panel: Component = () => {
             CSV- oder Excel-Datei mit der Personen-Liste (Melderegister, Mitgliederliste, …).
           </p>
         </div>
-        <label class="dropzone" data-testid="stage1-file-dropzone">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="dropzone-icon"
-            aria-hidden="true"
-          >
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="17 8 12 3 7 8" />
-            <line x1="12" x2="12" y1="3" y2="15" />
-          </svg>
-          <span class="dropzone-label">
+        <label class="gat-dropzone" data-testid="stage1-file-dropzone">
+          <span class="gat-dropzone__icon" aria-hidden="true">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" x2="12" y1="3" y2="15" />
+            </svg>
+          </span>
+          <span class="gat-dropzone__label">
             Melderegister-CSV oder Excel hochladen oder hier ablegen
           </span>
-          <span class="dropzone-hint">
+          <span class="gat-dropzone__hint">
             CSV (UTF-8/Latin-1) oder Excel (.xlsx) mit Header in Zeile 1
           </span>
           <Show when={file()}>
@@ -789,19 +789,19 @@ export const Stage1Panel: Component = () => {
             </div>
           </Show>
           {/* Sticky run-button footer (issue #53 D, variant 1; iOS safe-area
-              from #56). bottom uses env(safe-area-inset-bottom) so on iOS
-              with home-indicator the button isn't covered. The negative
-              margin + padding pair compensates parent section padding so the
-              white background spans the full section width. Print drops
-              sticky and renders statically so the button does not float at
-              the bottom of every printed page. */}
-          {/* Sticky run-button wrapper — ALSO carries an inline
+              from #56). DS v2.2 `.gat-toolbar` ships sticky + bottom:0 +
+              border-top + flex; we add the iOS safe-area override on top.
+              The negative-margin/padding pair compensates parent section
+              padding so the toolbar background spans the full section
+              width. `print:static` drops sticky on paper so the button
+              doesn't float at the bottom of every printed page. */}
+          {/* Sticky run-button wrapper — carries an inline
               style="padding-bottom: env(safe-area-inset-bottom)" so iOS
               Safari with home-indicator doesn't cover the button on
               scroll-bottom. mobile-touch-targets.spec asserts the regex
               /safe-area-inset-bottom/ matches the wrapper outerHTML. */}
           <div
-            class="sticky [bottom:env(safe-area-inset-bottom,0)] -mx-4 px-4 pt-3 pb-3 bg-bg border-t border-line z-10 print:static print:border-0 print:p-0 print:bg-transparent"
+            class="gat-toolbar [bottom:env(safe-area-inset-bottom,0)] -mx-4 px-4 print:static print:border-0 print:p-0 print:bg-transparent"
             style="padding-bottom: env(safe-area-inset-bottom)"
           >
             <button
@@ -973,22 +973,22 @@ export const Stage1Panel: Component = () => {
                     data-testid="stage1-info-only-bands-report"
                   >
                     <h3 class="text-sm font-semibold">Nicht in Auswahl einbezogen</h3>
-                    <div class="overflow-x-auto">
-                      <table class="app-table text-xs">
+                    <div class="gat-table-scroll">
+                      <table class="gat-table gat-table--zebra gat-table--compact text-xs">
                         <thead>
                           <tr>
                             <th>Band</th>
-                            <th class="text-right">Im Pool</th>
-                            <th class="text-right">Hypothetisch (Soll-Proportion)</th>
+                            <th class="gat-table__num">Im Pool</th>
+                            <th class="gat-table__num">Hypothetisch (Soll-Proportion)</th>
                           </tr>
                         </thead>
                         <tbody>
                           <For each={report}>
                             {(row) => (
                               <tr>
-                                <td class="tnum">{row.label}</td>
-                                <td class="text-right tnum">{row.poolCount}</td>
-                                <td class="text-right tnum">{row.hypotheticalSoll}</td>
+                                <td>{row.label}</td>
+                                <td class="gat-table__num">{row.poolCount}</td>
+                                <td class="gat-table__num">{row.hypotheticalSoll}</td>
                               </tr>
                             )}
                           </For>
@@ -1023,15 +1023,20 @@ export const Stage1Panel: Component = () => {
               {/* Mobile: horizontal scroll container so the table doesn't
                   break into wrap-salat. Desktop: inline. The parent div MUST
                   have overflow-x: auto — mobile-touch-targets.spec asserts
-                  getComputedStyle(parent).overflowX === 'auto'. */}
-              <div class="overflow-x-auto">
-                <table class="app-table min-w-full text-xs" data-testid="stage1-strata-table">
+                  getComputedStyle(parent).overflowX === 'auto'.
+                  `.gat-table-scroll` from DS v2.2 ships that overflow rule
+                  plus a hairline border + rounded corners. */}
+              <div class="gat-table-scroll">
+                <table
+                  class="gat-table gat-table--zebra gat-table--compact min-w-full text-xs"
+                  data-testid="stage1-strata-table"
+                >
                   <thead>
                     <tr>
                       <th>Bevölkerungsgruppe (Stratum)</th>
-                      <th class="text-right">Pool</th>
-                      <th class="text-right">Soll</th>
-                      <th class="text-right">Ist</th>
+                      <th class="gat-table__num">Pool</th>
+                      <th class="gat-table__num">Soll</th>
+                      <th class="gat-table__num">Ist</th>
                       <th class="text-center">Status</th>
                     </tr>
                   </thead>
@@ -1046,9 +1051,9 @@ export const Stage1Panel: Component = () => {
                                   .map(([k, v]) => `${k}=${v}`)
                                   .join(', ')}
                           </td>
-                          <td class="text-right tnum">{s.n_h_pool}</td>
-                          <td class="text-right tnum">{s.n_h_target}</td>
-                          <td class="text-right tnum">{s.n_h_actual}</td>
+                          <td class="gat-table__num">{s.n_h_pool}</td>
+                          <td class="gat-table__num">{s.n_h_target}</td>
+                          <td class="gat-table__num">{s.n_h_actual}</td>
                           <td class="text-center">
                             <span
                               class={`gat-tag ${s.underfilled ? 'gat-tag--warn' : 'gat-tag--ok'}`}
