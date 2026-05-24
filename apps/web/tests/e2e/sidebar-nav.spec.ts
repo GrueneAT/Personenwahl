@@ -80,6 +80,22 @@ test.describe('Sidebar navigation (≥md)', () => {
       expect((title ?? '').length).toBeGreaterThan(10);
     });
   }
+
+  test('nav-werkzeuge is an external link with target/rel and the hub URL', async ({ page }) => {
+    await page.goto('/');
+    const item = page.getByTestId('nav-werkzeuge');
+    await expect(item).toBeVisible();
+    await expect(item).toHaveAttribute('href', 'https://grueneat.github.io/werkzeuge/');
+    await expect(item).toHaveAttribute('target', '_blank');
+    // rel must include "noopener" (tabnabbing mitigation). Equality keeps
+    // the contract tight — extra tokens (e.g. "noreferrer") would be a
+    // future widening that this test should flag.
+    await expect(item).toHaveAttribute('rel', 'noopener');
+    // External links never carry the active state — they live outside the
+    // app's own route space.
+    const ariaCurrent = await item.getAttribute('aria-current');
+    expect(ariaCurrent).toBeNull();
+  });
 });
 
 test.describe('Sidebar at <md viewport', () => {
