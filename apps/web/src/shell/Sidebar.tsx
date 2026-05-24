@@ -39,6 +39,29 @@ function NavLink(props: NavItemProps) {
   );
 }
 
+interface ExternalNavItemProps {
+  href: string;
+  testid: string;
+  children: string;
+}
+
+/**
+ * External nav link — opens in a new tab and never carries an active state
+ * (lives outside this app's route space). UX convention: target="_blank"
+ * pairs with rel="noopener" so the opened tab cannot reach back into the
+ * opener via window.opener (Tabnabbing-Mitigation). The trailing arrow ↗
+ * keeps the "external" affordance visible without an icon dependency.
+ */
+function NavExternal(props: ExternalNavItemProps) {
+  return (
+    <li>
+      <a href={props.href} data-testid={props.testid} target="_blank" rel="noopener">
+        {props.children} <span aria-hidden="true">↗</span>
+      </a>
+    </li>
+  );
+}
+
 interface DisabledNavItemProps {
   testid: string;
   hint: string;
@@ -110,6 +133,13 @@ export const Sidebar: Component<Props> = (props) => {
           >
             Beispiel-Daten
           </NavLink>
+          {/* Cross-tool link to the Grüne-AT Werkzeuge hub. URL points at
+              the GitHub Pages mirror for now — the custom-domain
+              `werkzeuge.gruene.at` is pending DNS. Re-point when DNS is
+              live; consumers continue to land on the same hub. */}
+          <NavExternal href="https://grueneat.github.io/werkzeuge/" testid="nav-werkzeuge">
+            Werkzeuge
+          </NavExternal>
         </NavGroup>
       </nav>
       <div class="mt-auto p-4 space-y-1 border-t border-line">

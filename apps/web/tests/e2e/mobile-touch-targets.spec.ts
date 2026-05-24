@@ -192,7 +192,14 @@ test('desktop (1280): sidebar nav-* items meet baseline tap-area (regression-det
   // Verified data-testid set in Sidebar.tsx (NavLink instances only —
   // disabled items are <span> with no link semantics; the touch-target
   // contract applies to *interactive* elements).
-  for (const tid of ['nav-overview', 'nav-stage1', 'nav-stage3', 'nav-docs', 'nav-beispiele']) {
+  for (const tid of [
+    'nav-overview',
+    'nav-stage1',
+    'nav-stage3',
+    'nav-docs',
+    'nav-beispiele',
+    'nav-werkzeuge',
+  ]) {
     const item = page.getByTestId(tid);
     await item.waitFor({ state: 'visible', timeout: 5_000 });
     const box = await item.boundingBox();
