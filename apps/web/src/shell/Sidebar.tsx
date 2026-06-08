@@ -1,5 +1,4 @@
 import type { Component } from 'solid-js';
-import { Brand } from './Brand';
 import { NavGroup } from './NavGroup';
 
 /**
@@ -124,12 +123,9 @@ function NavDisabled(props: DisabledNavItemProps) {
 export const Sidebar: Component<Props> = (props) => {
   return (
     <aside
-      class="app-sidebar hidden md:flex md:flex-col md:w-sidebar-w md:fixed md:inset-y-0 md:left-0 md:border-r md:border-line"
+      class="app-sidebar hidden md:flex md:flex-col md:w-sidebar-w md:sticky md:top-0 md:self-start md:h-screen md:border-r md:border-line"
       data-testid="sidebar"
     >
-      <div class="p-4">
-        <Brand />
-      </div>
       <nav
         class="flex-1 px-3 overflow-y-auto"
         data-testid="primary-nav"

@@ -191,7 +191,7 @@ export const App: Component = () => {
   }
 
   return (
-    <div class="md:pl-sidebar-w">
+    <div class="md:flex md:items-start">
       {/* Skip-link to the main landmark — first focusable element on the
           page. Uses the DS `.gat-skiplink` utility from `design-system.css`
           (linked in `index.html`): visually hidden until keyboard focus,
@@ -201,7 +201,11 @@ export const App: Component = () => {
         Zum Hauptinhalt springen
       </a>
       <Sidebar mode={mode} />
-      <main id="main" tabindex="-1" class="mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-10 space-y-8">
+      <main
+        id="main"
+        tabindex="-1"
+        class="md:flex-1 md:min-w-0 mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-10 space-y-8"
+      >
         {/* Top navigation: pill-button tab bar. Visible at <md only — at md+
             the sidebar is the primary navigation. The pill-bar remains in
             the DOM at all breakpoints (display:none above md) because the
