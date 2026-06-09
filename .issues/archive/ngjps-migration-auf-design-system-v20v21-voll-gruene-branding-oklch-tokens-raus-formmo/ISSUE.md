@@ -2,7 +2,8 @@
 id: ngjps
 title: Migration auf design-system v2.0/v2.1 (voll Gruene-Branding, OkLCH-Tokens raus,
   Form/Modal/Tag nach DS-v2.1)
-status: open
+status: done
+ship_state: merged
 priority: medium
 labels:
 - migration
