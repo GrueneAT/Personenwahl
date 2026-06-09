@@ -6,7 +6,7 @@
  * `apps/web/index.html` (`https://grueneat.github.io/design-system/design-system.css`).
  *
  * Branding direction: full Grüne-AT branding — magenta CTAs, green
- * wordmark via the DS CDN, Barlow Semi Condensed via the DS stack.
+ * wordmark via the DS CDN, Raleway via the DS stack.
  * No civic-tech-neutral framing.
  */
 
@@ -43,11 +43,11 @@ module.exports = {
         'err-soft': 'var(--err-soft)',
       },
       fontFamily: {
-        // Aliased to the DS Grüne-AT stack via `--gat-font-*` (Barlow
+        // Aliased to the DS Grüne-AT stack via `--gat-font-*` (Raleway
         // Semi Condensed for copy/headline, Vollkorn for emphasis serif).
         sans: [
           'var(--gat-font-copy)',
-          'Barlow Semi Condensed',
+          'Raleway',
           'system-ui',
           '-apple-system',
           'BlinkMacSystemFont',
