@@ -4,7 +4,7 @@ import { defineConfig, devices } from '@playwright/test';
 // production). Override via LIVE_BASE_URL env to point at a staging deploy
 // or PR-preview without changing source.
 const BASE_URL =
-  process.env.LIVE_BASE_URL ?? 'https://flomotlik.github.io/buergerinnenrat/';
+  process.env.LIVE_BASE_URL ?? 'https://personenwahl.gruene.at/';
 
 export default defineConfig({
   testDir: './tests/smoke-live',

@@ -31,10 +31,10 @@ const APP_VERSION = (() => {
 })();
 
 export default defineConfig({
-  // Base path for asset URLs. Defaults to the GitHub Pages project path so
-  // production builds work out of the box. Local dev/preview and Playwright
-  // e2e need to opt out via VITE_BASE_PATH=/ (see playwright.config.ts).
-  base: process.env.VITE_BASE_PATH ?? '/buergerinnenrat/',
+  // Base path for asset URLs. Production is served at the root of the custom
+  // domain personenwahl.gruene.at (bound via apps/web/public/CNAME), so the
+  // default base is '/'. VITE_BASE_PATH can still override it if needed.
+  base: process.env.VITE_BASE_PATH ?? '/',
   define: {
     __GIT_SHA__: JSON.stringify(GIT_SHA),
     __BUILD_DATE__: JSON.stringify(BUILD_DATE),
