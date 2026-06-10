@@ -281,23 +281,14 @@ test('stage 1: CSV-Vorschau-Tabelle erscheint nach Upload (I)', async ({ page })
   expect(await dataRows.count()).toBe(5);
 });
 
-test('stage 1: Tabs tragen Untertitel als Tooltip + Schritt-Header (F)', async ({ page }) => {
+test('stage 1: Reiter zeigt den Schritt-Header (F)', async ({ page }) => {
   await page.goto('/');
-  // After the pill-tab redesign (#56) the subtitles moved from visible DOM
-  // to title attributes (still available to screen readers / on hover) so
-  // mobile no longer wraps. Assert against the title attribute now.
-  await expect(page.getByTestId('tab-stage1')).toHaveAttribute(
-    'title',
-    /Melderegister/,
-  );
-  await expect(page.getByTestId('tab-stage3')).toHaveAttribute(
-    'title',
-    /Antwortenden/,
-  );
-  // #65: pill-tabs are md:hidden at desktop viewport; the visible primary
-  // nav at md+ is the sidebar. Drive route via the URL hash (the production
-  // path) so the test is viewport-agnostic. The hashchange listener wires
-  // the signal as if a nav-item or pill-tab had been clicked.
+  // The pill-tab subtitle-tooltips were retired with the `.gat-toolnav`
+  // redesign: the visible Reiter label ("Stage 1 — Versand-Liste") now carries
+  // the meaning inline, so no hidden title attribute is needed. The remaining
+  // contract is the Stage-1 step header. Drive the route via the URL hash (the
+  // production path) so the test is viewport-agnostic — the hashchange listener
+  // wires the signal as if the nav Reiter had been clicked.
   await page.evaluate(() => {
     window.location.hash = '#/stage1';
   });
