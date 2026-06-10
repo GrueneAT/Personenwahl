@@ -116,6 +116,27 @@
  * are gone below.
  * ----------------------------------------------------------------------- */
 @layer components {
+  /* ---- BETA-Stoerer im Header ----
+     Die DS-Klasse `.gat-stoerer--magenta` liefert die schief gestellte
+     Magenta-Optik; hier nur klein gehalten und etwas nach oben versetzt,
+     damit der Stempel als kleine Markierung neben dem Wordmark sitzt.
+     Identisch zu Gemeindefinanzen. Auf sehr schmalen Viewports blendet der
+     Stoerer aus, damit das Wordmark nicht umbricht. */
+  .app-beta-marker {
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    padding: 0.1rem 0.45rem;
+    margin-left: 0.5rem;
+    transform: translateY(-0.35rem) rotate(-6deg);
+    line-height: 1;
+    align-self: center;
+  }
+  @media (max-width: 420px) {
+    .app-beta-marker {
+      display: none;
+    }
+  }
+
   /* ---- Buttons ---- */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-5;
