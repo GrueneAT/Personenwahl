@@ -4,7 +4,7 @@
  * The previous OkLCH Hue-145 token layer is gone. All tokens now alias
  * the Grüne-AT design-system variables (`--gat-color-*`, `--gat-web-*`)
  * loaded via `apps/web/index.html` from
- * `https://grueneat.github.io/design-system/design-system.css`.
+ * `https://design-system.gruene.at/design-system.css`.
  *
  * The short aliases below (`--bg`, `--ink`, `--accent`, `--ok-soft`, …)
  * exist only so the Tailwind config in `tailwind.config.cjs` and the
