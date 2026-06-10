@@ -167,11 +167,9 @@ export const Sidebar: Component<Props> = (props) => {
           >
             Beispiel-Daten
           </NavLink>
-          {/* Cross-tool link to the Grüne-AT Werkzeuge hub. URL points at
-              the GitHub Pages mirror for now — the custom-domain
-              `werkzeuge.gruene.at` is pending DNS. Re-point when DNS is
-              live; consumers continue to land on the same hub. */}
-          <NavExternal href="https://grueneat.github.io/werkzeuge/" testid="nav-werkzeuge">
+          {/* Cross-tool link to the Grüne-AT Werkzeuge hub on its custom
+              domain `werkzeuge.gruene.at` (DNS live). */}
+          <NavExternal href="https://werkzeuge.gruene.at/" testid="nav-werkzeuge">
             Werkzeuge
           </NavExternal>
         </NavGroup>
