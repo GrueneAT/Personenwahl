@@ -19,7 +19,6 @@ import { validateQuotas } from './quotas/model';
 import type { SeatAllocationOverride } from './quotas/seat-allocation';
 import { RunPanel } from './run/RunPanel';
 import { Stage1Panel } from './stage1/Stage1Panel';
-import { Sidebar } from './shell/Sidebar';
 import type { Pool, Quotas as EngineQuotas } from '@sortition/engine-contract';
 
 // Docs-Hub is the only docs entry point exposed at the App-level. Every docs
@@ -27,7 +26,7 @@ import type { Pool, Quotas as EngineQuotas } from '@sortition/engine-contract';
 // pulls its bundle when the user actually navigates to the Dokumentation tab.
 const DocsHub = lazy(() => import('./docs/DocsHub'));
 // Overview lives on its own lazy chunk so the default Stage-3 landing does
-// not pay for its bytes. Reached only via #/overview (sidebar nav).
+// not pay for its bytes. Reached only via #/overview (the toolnav "Übersicht").
 const Overview = lazy(() => import('./Overview'));
 
 interface ImportedPool {
@@ -180,94 +179,108 @@ export const App: Component = () => {
     onCleanup(() => window.removeEventListener('hashchange', applyFromHash));
   });
 
-  function navigateMode(next: AppMode) {
-    // Writing the hash triggers `hashchange`, which flips the signals via
-    // applyFromHash() — single update path keeps mode + URL in lockstep.
-    window.location.hash = hashFor(next, next === 'docs' ? docsRoute() : 'hub');
-  }
-
   function navigateDocsRoute(next: DocsRoute) {
     window.location.hash = hashFor('docs', next);
   }
 
   return (
-    <div class="md:flex md:items-start">
+    <div>
       {/* Skip-link to the main landmark — first focusable element on the
-          page. Uses the DS `.gat-skiplink` utility from `design-system.css`
-          (linked in `index.html`): visually hidden until keyboard focus,
-          then pops to the top-left as a high-contrast pill. Accessibility
-          floor for keyboard nav (WCAG 2.4.1). */}
+          page. Uses the DS `.gat-skiplink` utility from `design-system.css`. */}
       <a href="#main" class="gat-skiplink">
         Zum Hauptinhalt springen
       </a>
-      <Sidebar mode={mode} />
-      <main
-        id="main"
-        tabindex="-1"
-        class="md:flex-1 md:min-w-0 mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-10 space-y-8"
-      >
-        {/* Top navigation: pill-button tab bar. Visible at <md only — at md+
-            the sidebar is the primary navigation. The pill-bar remains in
-            the DOM at all breakpoints (display:none above md) because the
-            mobile-touch-targets contract asserts the tabs are present and
-            ≥44×44 at 375px viewport. On mobile it becomes a horizontal
-            scroll container so the pills stay on a single line. Subtitles
-            moved out of the visual DOM into title attributes so they remain
-            available for screen readers / hover tooltips on desktop. */}
-        <nav
-          class="md:hidden flex gap-2 overflow-x-auto pb-2 sm:pb-0 [scroll-snap-type:x_mandatory] -mx-4 px-4 sm:mx-0 sm:px-0"
-          role="tablist"
-          data-testid="main-nav"
-          aria-label="Mobile-Navigation"
-        >
-          <button
-            type="button"
-            role="tab"
-            aria-current={mode() === 'stage1' ? 'page' : undefined}
-            aria-selected={mode() === 'stage1'}
-            title="Stage 1 — Versand-Liste aus Melderegister"
-            class="pill-tab [scroll-snap-align:start]"
-            classList={{
-              'pill-tab-active': mode() === 'stage1',
-              'pill-tab-inactive': mode() !== 'stage1',
-            }}
-            onClick={() => navigateMode('stage1')}
-            data-testid="tab-stage1"
-          >
-            Stage 1 / Versand-Liste
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-current={mode() === 'docs' ? 'page' : undefined}
-            aria-selected={mode() === 'docs'}
-            title="Dokumentation — Algorithmus, Technik, Verifikation"
-            class="pill-tab [scroll-snap-align:start]"
-            classList={{
-              'pill-tab-active': mode() === 'docs',
-              'pill-tab-inactive': mode() !== 'docs',
-            }}
-            onClick={() => navigateMode('docs')}
-            data-testid="tab-docs"
-          >
-            Dokumentation
-          </button>
-          <button
-            type="button"
-            role="tab"
-            aria-current={mode() === 'stage3' ? 'page' : undefined}
-            aria-selected={mode() === 'stage3'}
-            title="Stage 3 — Panel ziehen aus Antwortenden"
-            class="pill-tab [scroll-snap-align:start]"
-            classList={{
-              'pill-tab-active': mode() === 'stage3',
-              'pill-tab-inactive': mode() !== 'stage3',
-            }}
-            onClick={() => navigateMode('stage3')}
-            data-testid="tab-stage3"
-          >
-            Stage 3 / Panel ziehen
-          </button>
+      <main id="main" tabindex="-1" class="mx-auto max-w-5xl px-4 sm:px-6 py-8 sm:py-10 space-y-8">
+        {/* Werkzeug-Navigation (DS `.gat-toolnav`): horizontale Reiter-Leiste
+            direkt unter der grünen Brandbar im Hauptcontainer — ersetzt das
+            frühere linke Seitenmenü und die mobile Pill-Leiste. Eine
+            Navigation für alle Viewports; die Reiter brechen auf schmalen
+            Viewports um statt zu scrollen. Reine <a href="#/…">-Anker, der
+            hashchange-Listener (siehe oben) bleibt die einzige Routing-Quelle.
+            Geplante/ausgelagerte Schritte bleiben als deaktivierte Reiter
+            sichtbar. */}
+        <nav class="gat-toolnav" data-testid="primary-nav" aria-label="Hauptnavigation">
+          <span class="gat-toolnav__group">
+            <a
+              class="gat-toolnav__item"
+              classList={{ 'gat-toolnav__item--active': mode() === 'overview' }}
+              aria-current={mode() === 'overview' ? 'page' : undefined}
+              href="#/overview"
+              data-testid="nav-overview"
+            >
+              Übersicht
+            </a>
+          </span>
+          <span class="gat-toolnav__group">
+            <span class="gat-toolnav__label">Verfahren</span>
+            <a
+              class="gat-toolnav__item"
+              classList={{ 'gat-toolnav__item--active': mode() === 'stage1' }}
+              aria-current={mode() === 'stage1' ? 'page' : undefined}
+              href="#/stage1"
+              data-testid="nav-stage1"
+            >
+              Stage 1 — Versand-Liste
+            </a>
+            <span
+              class="gat-toolnav__item gat-toolnav__item--disabled"
+              aria-disabled="true"
+              title="Outreach erfolgt außerhalb dieses Tools (Versand, Rückmeldung)."
+              data-testid="nav-stage2"
+            >
+              Stage 2 — Outreach (außerhalb Tool)
+            </span>
+            <a
+              class="gat-toolnav__item"
+              classList={{ 'gat-toolnav__item--active': mode() === 'stage3' }}
+              aria-current={mode() === 'stage3' ? 'page' : undefined}
+              href="#/stage3"
+              data-testid="nav-stage3"
+            >
+              Stage 3 — Panel-Auswahl
+            </a>
+            <span
+              class="gat-toolnav__item gat-toolnav__item--disabled"
+              aria-disabled="true"
+              title="Reserve-Pool / Drop-out-Replacement — Iteration 2."
+              data-testid="nav-stage4"
+            >
+              Stage 4 — Reserve (geplant)
+            </span>
+          </span>
+          <span class="gat-toolnav__group">
+            <span class="gat-toolnav__label">Mehr</span>
+            <a
+              class="gat-toolnav__item"
+              classList={{ 'gat-toolnav__item--active': mode() === 'docs' }}
+              aria-current={mode() === 'docs' ? 'page' : undefined}
+              href="#/docs"
+              data-testid="nav-docs"
+            >
+              Dokumentation
+            </a>
+            <a class="gat-toolnav__item" href="#/docs/beispiele" data-testid="nav-beispiele">
+              Beispiel-Daten
+            </a>
+            {/* External hub link — target/rel for tabnabbing mitigation; never
+                carries an active state (outside this app's route space). */}
+            <a
+              class="gat-toolnav__item"
+              href="https://werkzeuge.gruene.at/"
+              target="_blank"
+              rel="noopener"
+              data-testid="nav-werkzeuge"
+            >
+              Werkzeuge <span aria-hidden="true">↗</span>
+            </a>
+            <a
+              class="gat-toolnav__item"
+              href="mailto:florian.motlik@gruene.at"
+              data-testid="nav-mailto"
+            >
+              florian.motlik@gruene.at
+            </a>
+          </span>
         </nav>
 
         {/* Single <h1> per route. Docs route owns its <h1> via DocsLayout
@@ -357,6 +370,15 @@ export const App: Component = () => {
             </Show>
           </div>
         </Show>
+
+        {/* Footer — lokale-Daten-Hinweis + Build-Stempel. Aus dem früheren
+            Seitenmenü-Fuß in den Hauptcontainer gezogen. */}
+        <footer class="pt-6 border-t border-line flex flex-wrap items-center gap-x-3 gap-y-1">
+          <span class="text-xs text-ink-3">Daten bleiben lokal</span>
+          <span class="text-xs text-ink-3 font-mono">
+            v{(import.meta.env.VITE_APP_VERSION as string | undefined) ?? '?'} · {__GIT_SHA__}
+          </span>
+        </footer>
       </main>
     </div>
   );

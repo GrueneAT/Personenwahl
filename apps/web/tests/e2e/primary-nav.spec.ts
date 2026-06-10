@@ -1,11 +1,14 @@
 /**
- * Sidebar navigation contract — covers Sidebar.tsx (#65). Tests the actual
- * data-testid set and aria attributes the executor read from source:
+ * Primary-navigation contract — covers the `.gat-toolnav` Werkzeug-Navigation
+ * in App.tsx. The former left sidebar + mobile pill-bar were replaced by a
+ * single horizontal Reiter-Leiste under the green brand bar, in the main
+ * container. One nav for all viewports (it wraps instead of scrolling), so —
+ * unlike the old sidebar — it stays visible at <md too.
+ *
+ * Covered data-testid set:
  *   nav-overview, nav-stage1, nav-stage3, nav-docs, nav-beispiele (active links)
  *   nav-stage2, nav-stage4 (disabled — aria-disabled="true" + title)
- * Sidebar is `hidden md:flex` so a desktop-default viewport (≥md) renders it,
- * while <md viewports must hide it (the pill-tabs in main-nav are the
- * mobile-compat shim).
+ *   nav-werkzeuge (external), nav-mailto (mailto)
  */
 import { test, expect } from '@playwright/test';
 
@@ -22,10 +25,9 @@ const DISABLED_NAV_ITEMS: Array<{ testid: string }> = [
   { testid: 'nav-stage4' },
 ];
 
-test.describe('Sidebar navigation (≥md)', () => {
-  test('sidebar is visible at desktop viewport', async ({ page }) => {
+test.describe('Primary navigation (.gat-toolnav)', () => {
+  test('toolnav is visible at desktop viewport', async ({ page }) => {
     await page.goto('/');
-    await expect(page.getByTestId('sidebar')).toBeVisible();
     await expect(page.getByTestId('primary-nav')).toBeVisible();
   });
 
@@ -40,9 +42,9 @@ test.describe('Sidebar navigation (≥md)', () => {
   }
 
   for (const { testid, expectedHash, mode } of NAV_ROUTES) {
-    // Skip the sub-route nav-beispiele aria-current check: Sidebar.tsx:107-109
-    // intentionally hard-codes active=false because the docs sub-routes keep
-    // the nav-docs top-level item active. Verify that semantics instead.
+    // Skip the sub-route nav-beispiele aria-current check: the docs sub-routes
+    // keep the nav-docs top-level item active, so nav-beispiele itself never
+    // carries aria-current. Verify that semantics separately below.
     if (testid === 'nav-beispiele') continue;
 
     test(`${testid} sets aria-current="page" when route active`, async ({ page }) => {
@@ -53,18 +55,24 @@ test.describe('Sidebar navigation (≥md)', () => {
         window.location.hash = h;
       }, expectedHash);
       // Wait for Solid to re-render the aria-current attribute.
-      await expect.poll(async () => page.getByTestId(testid).getAttribute('aria-current')).toBe('page');
+      await expect
+        .poll(async () => page.getByTestId(testid).getAttribute('aria-current'))
+        .toBe('page');
       void mode;
     });
   }
 
-  test('nav-beispiele keeps nav-docs as the active top-level when on docs sub-route', async ({ page }) => {
+  test('nav-beispiele keeps nav-docs as the active top-level when on docs sub-route', async ({
+    page,
+  }) => {
     await page.goto('/');
     await page.evaluate(() => {
       window.location.hash = '#/docs/beispiele';
     });
-    await expect.poll(async () => page.getByTestId('nav-docs').getAttribute('aria-current')).toBe('page');
-    // Sub-route link itself is intentionally NOT marked active per Sidebar.tsx:108.
+    await expect
+      .poll(async () => page.getByTestId('nav-docs').getAttribute('aria-current'))
+      .toBe('page');
+    // Sub-route link itself is intentionally NOT marked active.
     const beispieleAria = await page.getByTestId('nav-beispiele').getAttribute('aria-current');
     expect(beispieleAria).toBeNull();
   });
@@ -114,14 +122,14 @@ test.describe('Sidebar navigation (≥md)', () => {
   });
 });
 
-test.describe('Sidebar at <md viewport', () => {
+test.describe('Primary navigation at <md viewport', () => {
   test.use({ viewport: { width: 375, height: 812 } });
 
-  test('sidebar is hidden, pill-tabs (main-nav) are visible', async ({ page }) => {
+  test('toolnav stays visible on mobile (wraps instead of scrolling)', async ({ page }) => {
     await page.goto('/');
-    // The sidebar element exists in the DOM but `hidden md:flex` resolves to
-    // display:none at <md, which Playwright's toBeHidden treats correctly.
-    await expect(page.getByTestId('sidebar')).toBeHidden();
-    await expect(page.getByTestId('main-nav')).toBeVisible();
+    // Unlike the old sidebar, the toolnav is the single nav for every
+    // breakpoint — it must remain visible at <md.
+    await expect(page.getByTestId('primary-nav')).toBeVisible();
+    await expect(page.getByTestId('nav-stage1')).toBeVisible();
   });
 });
