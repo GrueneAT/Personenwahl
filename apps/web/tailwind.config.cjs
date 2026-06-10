@@ -3,7 +3,7 @@
  *
  * The previous OkLCH Hue-145 token layer is gone. The aliases below
  * are thin Tailwind utility shims that read DS variables loaded via
- * `apps/web/index.html` (`https://grueneat.github.io/design-system/design-system.css`).
+ * `apps/web/index.html` (`https://design-system.gruene.at/design-system.css`).
  *
  * Branding direction: full Grüne-AT branding — magenta CTAs, green
  * wordmark via the DS CDN, Barlow Semi Condensed via the DS stack.

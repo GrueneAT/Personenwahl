@@ -18,7 +18,7 @@ import type { Component } from 'solid-js';
 export const Brand: Component<{ subtitle?: string }> = (props) => (
   <div class="flex items-center gap-3" data-testid="brand">
     <img
-      src="https://grueneat.github.io/design-system/assets/gruene-logo.svg"
+      src="https://design-system.gruene.at/assets/gruene-logo.svg"
       alt="Grüne — Bürgerinnenrat"
       class="h-8 w-auto shrink-0"
       width="32"

@@ -2,7 +2,7 @@
  * Local mirror of the Grüne-AT design-system chart palette.
  *
  * Source of truth is the design-system at
- * `https://grueneat.github.io/design-system/gat-charts.js` (the same
+ * `https://design-system.gruene.at/gat-charts.js` (the same
  * values surface as `--gat-web-chart-1` … `--gat-web-chart-8` in
  * `design-system.css`). We mirror them here as plain TypeScript
  * constants rather than `import`-ing the CDN ES module because:
