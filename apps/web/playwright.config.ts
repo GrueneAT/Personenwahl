@@ -23,8 +23,8 @@ export default defineConfig({
     url: 'http://127.0.0.1:4173',
     reuseExistingServer: !process.env.CI,
     timeout: 60_000,
-    // Override the production default of `/buergerinnenrat/` so vite preview
-    // serves assets from the root path that the e2e tests expect.
+    // vite base now defaults to '/' (custom-domain root); kept explicit so a
+    // future base change does not silently break preview asset URLs.
     env: {
       VITE_BASE_PATH: '/',
     },
