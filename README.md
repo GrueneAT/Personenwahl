@@ -4,7 +4,7 @@
 
 Browser-natives Werkzeug für die stratifizierte Zufallsauswahl von Personen — z.B. für Bürgerinnenräte (DE/AT), Landeskonferenz-Delegation oder Vereinsgremien. Alle Daten bleiben im Browser, kein Server-Backend.
 
-**Live (vorläufige URL):** <https://flomotlik.github.io/buergerinnenrat/> — die URL wird mit der Infrastruktur-Migration aktualisiert (siehe Issue #73, deferred).
+**Live (vorläufige URL):** <https://personenwahl.gruene.at/> — die URL wird mit der Infrastruktur-Migration aktualisiert (siehe Issue #73, deferred).
 
 ## Rebranding-Hinweis
 
@@ -32,7 +32,7 @@ Power-User mit lokal installiertem Node 20 + pnpm + Playwright können
 
 Du willst das Tool ohne eigene Melderegister-Datei testen? Auf der Live-Seite
 findest du unter
-[Doku → Beispiel-Daten](https://flomotlik.github.io/buergerinnenrat/#/docs/beispiele)
+[Doku → Beispiel-Daten](https://personenwahl.gruene.at/#/docs/beispiele)
 vier vor-generierte synthetische Datensätze, jeweils als **CSV** und als
 **Excel** (`.xlsx`):
 
@@ -52,7 +52,7 @@ Die App akzeptiert beim Upload sowohl **CSV** (UTF-8 oder Latin-1, Trenner
 mit Header in Zeile 1). Excel wird via SheetJS lazy-geladen — CSV-only-User
 zahlen keinen Bandwidth-Hit. Detail-Anforderungen für Excel-Uploads (kein
 Multi-Sheet, keine Formeln, keine merged cells) siehe
-[Doku → Beispiel-Daten](https://flomotlik.github.io/buergerinnenrat/#/docs/beispiele).
+[Doku → Beispiel-Daten](https://personenwahl.gruene.at/#/docs/beispiele).
 Spezifikation: Issue #72.
 
 ## Bürgerrat-Sortition (Hintergrund)

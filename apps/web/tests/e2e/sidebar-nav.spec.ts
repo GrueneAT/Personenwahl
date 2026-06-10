@@ -85,7 +85,7 @@ test.describe('Sidebar navigation (≥md)', () => {
     await page.goto('/');
     const item = page.getByTestId('nav-werkzeuge');
     await expect(item).toBeVisible();
-    await expect(item).toHaveAttribute('href', 'https://grueneat.github.io/werkzeuge/');
+    await expect(item).toHaveAttribute('href', 'https://werkzeuge.gruene.at/');
     await expect(item).toHaveAttribute('target', '_blank');
     // rel must include "noopener" (tabnabbing mitigation). Equality keeps
     // the contract tight — extra tokens (e.g. "noreferrer") would be a
