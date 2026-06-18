@@ -69,7 +69,7 @@
     /* ----- Typography — alias DS font variables ----- */
     --serif: var(--gat-font-emphasis, Vollkorn, Georgia, serif);
     --sans:
-      var(--gat-font-copy, 'Barlow Semi Condensed'), -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      var(--gat-font-copy, 'Raleway'), -apple-system, BlinkMacSystemFont, 'Segoe UI',
       sans-serif;
     --mono: ui-monospace, 'SF Mono', Menlo, monospace;
   }
@@ -79,9 +79,9 @@
   }
 
   body {
-    /* Sans stack is the DS Barlow Semi Condensed copy face. We deliberately
+    /* Sans stack is the DS Raleway copy face. We deliberately
        drop the Inter-specific `cv11`/`ss01`/`ss03` font-feature-settings —
-       they were tuned for Inter v3 and have no effect on Barlow. */
+       they were tuned for Inter v3 and have no effect on Raleway. */
     font-family: var(--sans);
     text-rendering: optimizeLegibility;
     background: var(--bg);
