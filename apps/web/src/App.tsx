@@ -371,13 +371,35 @@ export const App: Component = () => {
           </div>
         </Show>
 
-        {/* Footer — lokale-Daten-Hinweis + Build-Stempel. Aus dem früheren
-            Seitenmenü-Fuß in den Hauptcontainer gezogen. */}
+        {/* Footer — lokale-Daten-Hinweis + Build-Stempel + Impressum/Datenschutz.
+            Aus dem früheren Seitenmenü-Fuß in den Hauptcontainer gezogen. Sitzt
+            im Hauptcontainer, also auf jeder Route sichtbar (auch #/docs, siehe
+            DocsHub weiter oben in demselben <main>). */}
         <footer class="pt-6 border-t border-line flex flex-wrap items-center gap-x-3 gap-y-1">
           <span class="text-xs text-ink-3">Daten bleiben lokal</span>
           <span class="text-xs text-ink-3 font-mono">
             v{(import.meta.env.VITE_APP_VERSION as string | undefined) ?? '?'} · {__GIT_SHA__}
           </span>
+          {/* External legal links — target/rel for tabnabbing mitigation, wie
+              beim werkzeuge.gruene.at-Hub-Link oben in .gat-toolnav. */}
+          <a
+            class="text-xs text-ink-3 underline"
+            href="https://gruene.at/impressum/"
+            target="_blank"
+            rel="noopener"
+            data-testid="footer-impressum"
+          >
+            Impressum
+          </a>
+          <a
+            class="text-xs text-ink-3 underline"
+            href="https://gruene.at/datenschutzerklarung/"
+            target="_blank"
+            rel="noopener"
+            data-testid="footer-datenschutz"
+          >
+            Datenschutzerklärung
+          </a>
         </footer>
       </main>
     </div>
