@@ -23,8 +23,6 @@ github:
 # Konvention, beide funktionieren.
 naming:
   branch: "{slug}"
-  prefix: ""
-  separator: "-"
 
 # ---- Commit-Format -------------------------------------------------------
 commits:
